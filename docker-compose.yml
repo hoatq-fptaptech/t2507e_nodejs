@@ -1,0 +1,31 @@
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb_container
+    restart: always
+    environment:
+      MONGO_INITDB_DATABASE: t2507e_db
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+
+  mongo-express:
+    image: mongo-express:latest
+    container_name: mongo_express_container
+    restart: always
+    ports:
+      - "8081:8081"
+    environment:
+      # Kết nối tới service 'mongodb' ở trên bằng root user
+      ME_CONFIG_MONGODB_URL: mongodb://root:root@mongodb:27017/
+      # Tài khoản đăng nhập vào giao diện web Mongo Express
+      ME_CONFIG_BASICAUTH_USERNAME: admin
+      ME_CONFIG_BASICAUTH_PASSWORD: admin
+    depends_on:
+      - mongodb
+
+volumes:
+  mongodb_data:

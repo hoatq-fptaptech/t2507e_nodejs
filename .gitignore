@@ -1,0 +1,5 @@
+.idea/
+.env
+.vs
+node_modules/
+*-lock.*f
