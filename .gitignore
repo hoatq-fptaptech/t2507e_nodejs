@@ -2,4 +2,4 @@
 .env
 .vs
 node_modules/
-*-lock.*f
+package-lock.json
